@@ -1,0 +1,57 @@
+ Adha
+ azkha (indah)
+ Dian 1
+ Dian 2
+ Dwi
+ Erlin
+ Eti
+ Ifah
+ Ifah 2
+ Ina
+ inda
+ Irsan mansur
+ Rina
+ Tina 2
+amalia
+Ana
+Devy
+Diyah 1
+Diyah 2
+Diyah 3
+Ekki 1
+Ekki 2
+Erni
+ishlah (Devy)
+linda
+Nur Ihzan
+Tina
+Saya bantu Urutkan
+Arisan Alumni 100rb/bulan(tgl 15)
+
+1	 Adha
+2	 azkha (indah)
+3	 Dian 1
+4	 Dian 2
+5	 Dwi
+6	 Erlin
+7	 Eti
+8	 Ifah
+9	 Ifah 2
+10	 Ina
+11	 inda
+12	 Irsan mansur
+13	 Rina
+14	 Tina 2
+15	amalia
+16	Ana
+17	Devy
+18	Diyah 1
+19	Diyah 2
+20	Diyah 3
+21	Ekki 1
+22	Ekki 2
+23	Erni
+24	ishlah (Devy)
+25	linda
+26	Nur Ihzan
+27	Tina
