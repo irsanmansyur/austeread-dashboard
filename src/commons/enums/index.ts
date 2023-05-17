@@ -1,5 +1,5 @@
 import { COOKIE } from "@/commons/enums/cookie";
-import { routes } from "@/commons/enums/route";
+import { routes } from "@/commons/enums/routes";
 const enums = {
   COOKIE,
   routes,

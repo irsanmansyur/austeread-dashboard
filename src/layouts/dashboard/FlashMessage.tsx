@@ -1,9 +1,10 @@
+import { errorType } from "@/commons/hooks/message";
 import { useEffect } from "react";
 import { toast, ToastContainer, ToastOptions } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function FlashMessage({ flash, second = 5 }: any) {
+export default function FlashMessage({ flash, second = 5 }: { flash: errorType; second?: number }) {
   useEffect(() => {
-    if (Object.keys(flash).length < 1) return;
+    if (!flash || Object.keys(flash).length < 1) return;
 
     let toastOptions: ToastOptions = {
       position: "top-right",
@@ -15,12 +16,7 @@ export default function FlashMessage({ flash, second = 5 }: any) {
       progress: undefined,
       theme: "colored",
     };
-    for (const f in flash) {
-      const message = flash[f];
-      if (f == "message") toast.info(message, toastOptions);
-      if (f == "danger") toast.error(message, toastOptions);
-      if (f == "success") toast.success(message, toastOptions);
-    }
+    toast[flash.type](flash.message, toastOptions);
   }, [flash]);
 
   return (

@@ -1,4 +1,4 @@
-import { routes } from "@/commons/enums/route";
+import { routes } from "@/commons/enums/routes";
 import { Link } from "react-router-dom";
 
 export default function BreadcrumbsHome() {

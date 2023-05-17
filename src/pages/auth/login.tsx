@@ -7,11 +7,11 @@ import { useRef, useState } from "react";
 import { useAuth } from "@/context/auth";
 import LoginException from "@/commons/exception/login.exception";
 import AlertDanger from "@/components/alert/danger";
-import { routes } from "@/commons/enums/route";
+import { routes } from "@/commons/enums/routes";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [message, setMessage] = useState<string | undefined>();
   const [data, setData] = useState<{ register_method?: number; email?: string; password?: string }>();
   const captchaRef = useRef(null);
   const { login, loadingApi } = useAuth();
@@ -20,15 +20,15 @@ export default function Login() {
 
     // @ts-ignore
     const token = captchaRef?.current?.getValue() as string;
-    if (!token) return setErrorMessage("Error! You must confirm you are not a robot");
+    if (!token) return setMessage("Error! You must confirm you are not a robot");
 
     try {
       await login({ email: `${data?.email}`, captcha_token: token, password: `${data?.password}` });
-      setErrorMessage(undefined);
+      setMessage(undefined);
       navigate(routes.dashboard, { replace: true });
     } catch (error) {
       if (error instanceof LoginException) {
-        setErrorMessage(error.errors.join(","));
+        setMessage(error.errors.join(","));
         return;
       }
       console.log("error", error);
@@ -45,7 +45,7 @@ export default function Login() {
           <h3 className="block antialiased tracking-normal font-sans text-3xl font-semibold leading-snug text-white">Sign In</h3>
         </div>
         <div className="p-6 flex flex-col gap-4">
-          {errorMessage && <AlertDanger desc={errorMessage} message="Login Error" />}
+          {message && <AlertDanger desc={message} message="Login Error" />}
           <InputCustom label="Email" onChange={(e) => setData({ ...data, email: e.target.value })} name="email" autoComplete="username" type="email" />
           <InputCustom type="password" name="password" onChange={(e) => setData({ ...data, password: e.target.value })} autoComplete="current-password" label="Password" />
           <div>

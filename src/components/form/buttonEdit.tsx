@@ -3,7 +3,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import ButtonCustom from "./button";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {};
-export default function ButtonEdit({ children, ...props }: Props) {
+export function ButtonEdit({ children, ...props }: Props) {
   return (
     <ButtonCustom
       {...props}
@@ -14,3 +14,5 @@ export default function ButtonEdit({ children, ...props }: Props) {
     </ButtonCustom>
   );
 }
+
+export default ButtonEdit;

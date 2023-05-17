@@ -28,7 +28,7 @@ function UserList() {
   const setBreads = useSetRecoilState(listBreadCrumbAtom);
   useEffect(() => {
     setBreads([{ text: "Users" }]);
-
+    refetchUsers();
     return () => {};
   }, []);
 

@@ -1,7 +1,7 @@
+@import "./datatable.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "./datatable.css";
 
 .emoji-404 {
   position: relative;
@@ -18,4 +18,8 @@
   100% {
     top: 0px;
   }
+}
+
+.tox-notifications-container {
+  display: none !important;
 }

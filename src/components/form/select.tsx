@@ -3,12 +3,12 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import InputError from "./InputError";
 interface Props extends React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
-  options: { value: string | number; label: string }[];
+  options?: { value: string | number; label: string }[];
   label?: string;
   error?: string;
   classParent?: string;
 }
-export default function SelectCustom({ className = "", label = "", classParent = "", options = [], id, error, ...props }: Props) {
+export function SelectCustom({ className = "", label = "", classParent = "", options = [], id, error, ...props }: Props) {
   const idCustom = lastId(id ?? "select-");
   return (
     <div className={twMerge("mb-3 last:mb-1", classParent)}>
@@ -35,3 +35,5 @@ export default function SelectCustom({ className = "", label = "", classParent =
     </div>
   );
 }
+
+export default SelectCustom;

@@ -5,9 +5,10 @@ import { makeUseAxios, UseAxios } from "axios-hooks";
 import { AppInterface } from "@/commons/interface/app";
 import Cookies from "js-cookie";
 import { COOKIE } from "@/commons/enums/cookie";
-import { routes } from "@/commons/enums/route";
+import { routes } from "@/commons/enums/routes";
 import axios from "axios";
 import LoginException from "@/commons/exception/login.exception";
+import LoaderScreen from "@/components/loader/screen";
 // import Loader from "@/components/loader";
 
 export type LoginType = {
@@ -121,8 +122,8 @@ export const useAuth = () => useContext(AuthContext);
 
 export const ProtectRoute = ({ children }: any) => {
   const { isAuthenticated, loading } = useAuth();
-  if (loading || (!isAuthenticated && window.location.pathname !== routes.login)) {
-    return <>Loading</>;
+  if (loading && !isAuthenticated && window.location.pathname !== routes.login) {
+    return <LoaderScreen />;
   }
   return children;
 };

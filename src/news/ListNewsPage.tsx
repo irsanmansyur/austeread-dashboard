@@ -7,6 +7,8 @@ import { AppInterface } from "@/commons/interface/app";
 import ButtonCustom from "@/components/form/button";
 import ButtonEdit from "@/components/form/buttonEdit";
 import { AiOutlineUserAdd } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { routes } from "@/commons/enums/routes";
 
 export default function ListNewsPage() {
   const { useAxios } = useAuth();
@@ -18,7 +20,6 @@ export default function ListNewsPage() {
   const setBreads = useSetRecoilState(listBreadCrumbAtom);
   useEffect(() => {
     setBreads([{ text: "News" }]);
-
     return () => {};
   }, []);
 
@@ -27,9 +28,9 @@ export default function ListNewsPage() {
       <div className="py-8">
         <div className="flex justify-between">
           <h2 className="text-2xl font-semibold leading-tight">News</h2>
-          <div className="flex items-center gap-2 cursor-pointer" onClick={(e) => setOpenAddUser(!openAddUser)}>
+          <Link to={routes.news_add} className="flex items-center gap-2 cursor-pointer">
             Tambah
-          </div>
+          </Link>
         </div>
         {/* <div className="my-2 flex sm:flex-row flex-col">
           <div className="flex flex-row mb-1 sm:mb-0">

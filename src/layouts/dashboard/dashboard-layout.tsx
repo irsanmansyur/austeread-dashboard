@@ -6,16 +6,28 @@ import Footer from "./footer";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { ProtectRoute, useAuth } from "@/context/auth";
-import { routes } from "@/commons/enums/route";
+import { routes } from "@/commons/enums/routes";
+import { useMessage } from "@/commons/hooks/message";
 
 export default function DashboardLayout() {
-  let { isAuthenticated, loading } = useAuth();
+  let { isAuthenticated, loading, api, logout } = useAuth();
+  const { message } = useMessage();
+
   let navigate = useNavigate();
   const [openSideBar, setOpenSideBar] = useState(null);
 
   useEffect(() => {
+    api.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response && error.response.status === 401) {
+          logout();
+          navigate(routes.login, { replace: true });
+        }
+        return Promise.reject(error);
+      }
+    );
     if (!loading && !isAuthenticated) navigate(routes.login, { replace: true });
-
     return () => {};
   }, [isAuthenticated, loading]);
 
@@ -27,7 +39,7 @@ export default function DashboardLayout() {
           <Navbar breadcrumbs={<Breadcrumb />} openSideBar={openSideBar} setOpenSideBar={setOpenSideBar} />
           <main className="mx-auto flex min-h-[calc(100vh-130px)] justify-between flex-col ">
             <div className="content relative">
-              <FlashMessage flash={{}} />
+              {message && <FlashMessage flash={message} />}
               <Outlet />
             </div>
             <Footer time_render={0.2} />

@@ -16,6 +16,12 @@ export namespace AppInterface {
     role: string;
     token?: string;
   };
+  export type discount = {
+    id: number;
+    code: string;
+    price: number;
+    active: number;
+  };
   export type Config = {
     about: string;
     advertising_opportunities: string;
@@ -45,7 +51,8 @@ export namespace AppInterface {
   export interface Article extends baseMongo {
     title: string;
     desc: string;
-    thumbnail: string;
+    category: number | string;
+    thumbnail: File | string;
     img: string;
     like: number;
     tbl_user_first_name: string;
@@ -53,9 +60,11 @@ export namespace AppInterface {
     tbl_news_category_name: string;
     tbl_user: User;
     tbl_news_category: Kategori;
+    creator: string;
   }
   export interface Kategori extends baseMongo {
     name: string;
+    tbl_user: User;
   }
   export interface Comment extends baseMongo {
     listIdReplyComment: number;
@@ -82,4 +91,26 @@ export namespace AppInterface {
       createdAt: string;
     };
   }
+  export interface HightLightWordQuery {
+    id: string;
+    word_query: string;
+  }
+
+  export interface questions {
+    id: string;
+    name: string;
+    address: string;
+    phone: string;
+    questions: string;
+    createdAt: string;
+  }
+  export type CategoryProduct = {
+    id: string;
+    name: string;
+  };
+  export type SubProductCategory = {
+    id: string;
+    category_id: string;
+    name: string;
+  };
 }

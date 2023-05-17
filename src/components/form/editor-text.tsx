@@ -1,7 +1,7 @@
 import { Editor } from "@tinymce/tinymce-react";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function EditorText({ textHtml, onChange, height = 200, folder }: { textHtml: string; onChange?(htmlValue: string): void; height?: number; folder: string }) {
+export function EditorText({ textHtml, onChange, height = 200, folder }: { textHtml: string; onChange?(htmlValue: string): void; height?: number; folder: string }) {
   const [html, setHtml] = useState(textHtml);
   const editorRef = useRef();
   const [images, setImages] = useState([]);
@@ -44,3 +44,5 @@ export default function EditorText({ textHtml, onChange, height = 200, folder }:
     </>
   );
 }
+
+export default EditorText;

@@ -4,7 +4,8 @@ import { MdArticle, MdCategory, MdOutlineArticle } from "react-icons/md/index";
 import { BsLayoutWtf, BsPeopleFill, BsPersonSquare } from "react-icons/bs/index";
 import { BiPhotoAlbum } from "react-icons/bi/index";
 import { NavLink } from "react-router-dom";
-import { routes } from "@/commons/enums/route";
+import { routes } from "@/commons/enums/routes";
+import { Icon } from "@iconify/react";
 
 export default function Sidebar({ openSideBar, setOpenSideBar }: { setting_app?: object; openSideBar: any; setOpenSideBar: any }) {
   const LiSideBar = ({ url = "#", text, icon }: any) => {
@@ -56,18 +57,44 @@ export default function Sidebar({ openSideBar, setOpenSideBar }: { setting_app?:
             <p className="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">Users</p>
           </li>
           <LiSideBar url={routes.manage_users} text="Manage Users" icon={<BsPeopleFill className="w-5 h-5 text-inherit" />} />
-          <li className="border-b  mx-4 border-b-blue-gray-800"></li>
           {/* end of user menu */}
-
+          <LiPembatas />
           {/* News Menu */}
           <li className="mx-3.5 mt-4 mb-2">
             <p className="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">News</p>
           </li>
           <LiSideBar url={routes.news} text="Manage News" icon={<MdOutlineArticle className="w-5 h-5 text-inherit" />} />
-          <LiSideBar url={routes.news_category} text="Manage News Category" icon={<MdCategory className="w-5 h-5 text-inherit" />} />
+          <LiSideBar url={routes.categori.list} text="Manage News Category" icon={<MdCategory className="w-5 h-5 text-inherit" />} />
+          <LiSideBar url={routes.hightlight.list} text="Manage Hightlight" icon={<Icon className="w-5 h-5 text-inherit" icon="cryptocurrency:hight" />} />
           {/* end of news menu */}
+          <LiPembatas />
+          {/* Product Menu */}
+          <li className="mx-3.5 mt-4 mb-2">
+            <p className="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">Product</p>
+          </li>
+          <LiSideBar url={routes.product.list} text="Product List" icon={<Icon className="w-5 h-5 text-inherit" icon="akar-icons:product-hunt-fill" />} />
+          <LiSideBar url={routes.product.category} text="Product Category" icon={<Icon className="w-5 h-5 text-inherit" icon="bxs:category" />} />
+          <LiSideBar url={routes.product.sub_category} text="Product Sub Category" icon={<Icon className="w-5 h-5 text-inherit" icon="iconamoon:category-thin" />} />
+          {/* end of Product menu */}
+          <LiPembatas />
+
+          {/* Discount Menu */}
+          <LiSideBar url={routes.discount} text="Discount Code" icon={<Icon icon={"bxs:discount"} className="w-5 h-5 text-inherit" />} />
+          {/* end of Discount  menu */}
+
+          {/* Questions  Menu */}
+          <LiSideBar url={routes.questions} text="Questions List" icon={<Icon icon={"mdi:question-mark-circle-outline"} className="w-5 h-5 text-inherit" />} />
+          {/* end of question  menu */}
+
+          {/* Configuration Menu */}
+          <LiSideBar url={routes.configuration.list} text="Configuration List" icon={<Icon icon="icon-park-solid:config" className="w-5 h-5 text-inherit" />} />
+          {/* Endof Configuration */}
         </ul>
       </div>
     </aside>
   );
 }
+
+const LiPembatas = () => {
+  return <li className="border-b  mx-4 border-b-blue-gray-800 my-4"></li>;
+};
