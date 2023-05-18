@@ -3,28 +3,32 @@ import { Fragment, useEffect, useState } from "react";
 import { InputCustom, ButtonCustom } from "@/components/form";
 import { VscChromeClose } from "react-icons/vsc";
 import { useAuth } from "@/context/auth";
+import { AppInterface } from "@/commons/interface/app";
 import { useMessage } from "@/commons/hooks/message";
-type Props = { open: boolean; onCLose?: (updated?: boolean) => void };
-export default function EditCategory({ onCLose, open }: Props) {
+type Props = { category?: AppInterface.Kategori; onCLose?: (updated?: boolean) => void; onUpdated?: (response: AxiosResponse<any, any> | undefined) => void };
+export default function EditCategory({ onCLose, category, onUpdated }: Props) {
+  if (!category) return <></>;
+
   const { setMessage } = useMessage();
-  let [isOpen, setIsOpen] = useState(open);
+  let [isOpen, setIsOpen] = useState(false);
   const { useAxios } = useAuth();
-  const [{ loading: postLoading, error: postError, response: responsePost }, executePost] = useAxios({ url: "/products-category", method: "PUT" }, { manual: true });
-  const [data, setData] = useState({ name: "" });
+  const [{ loading: putLoading, error: putError, response: responsePut }, executePost] = useAxios({ url: "/news-category/" + category.id, method: "PUT" }, { manual: true });
+  const [data, setData] = useState({ name: category.name });
 
   useEffect(() => {
-    if (responsePost?.status && responsePost.status >= 200 && responsePost.status < 300) {
+    if (responsePut?.status && responsePut.status >= 200 && responsePut.status < 300) {
       setData({ name: "" });
-      setMessage({ type: "success", message: responsePost.data?.message || "Product Category Created" });
+      setMessage({ type: "success", message: responsePut.data?.message || "Product Category updated" });
+      onUpdated && onUpdated(responsePut);
       closeModal(true);
     }
     return () => {};
-  }, [responsePost]);
+  }, [responsePut]);
 
   useEffect(() => {
-    setIsOpen(open);
+    setIsOpen(!!category);
     return () => {};
-  }, [open]);
+  }, [category]);
 
   function closeModal(updated?: boolean) {
     setIsOpen(false);
@@ -64,13 +68,13 @@ export default function EditCategory({ onCLose, open }: Props) {
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900 border-b px-6 pb-5 mb-2 -mx-6 flex justify-between">
-                    <span>Create Category Product</span>
+                    <span>Update News Category</span>
                     <VscChromeClose className="cursor-pointer" onClick={(e) => closeModal()} />
                   </Dialog.Title>
                   <form className="my-6" onSubmit={updateData}>
                     <InputCustom label="Category Name" onChange={(e) => setData({ ...data, name: e.target.value })} value={data.name} />
                     <div className="mt-4">
-                      <ButtonCustom disabled={postLoading} type="submit" className="w-full">
+                      <ButtonCustom disabled={putLoading} type="submit" className="w-full">
                         Save
                       </ButtonCustom>
                     </div>

@@ -8,10 +8,10 @@ import { ButtonCustom, ButtonDelete, ButtonEdit } from "@/components/form";
 import { Icon } from "@iconify/react";
 import CreateCategory from "./CreateCategory";
 import routes from "@/commons/enums/routes";
-import EditCategory from "@/category/EditCategory";
+import EditCategory from "@/news/category/EditCategory";
 export function ListCategoryProductPage() {
   const { useAxios, api } = useAuth();
-  const [{ data = [], loading, error: errorLoadCategory, response }, refetchCategory] = useAxios<AppInterface.CategoryProduct[]>({ url: "/products-category" });
+  const [{ data = { data: [] }, loading, error: errorLoadCategory, response }, refetchCategory] = useAxios<{ data: AppInterface.CategoryProduct[] }>({ url: "/products-category" });
   const setBreads = useSetRecoilState(listBreadCrumbAtom);
   useEffect(() => {
     setBreads([{ text: "Product", url: routes.product.list }, { text: "Category" }]);
@@ -87,7 +87,7 @@ export function ListCategoryProductPage() {
                     </td>
                   </tr>
                 ) : (
-                  data.map((category, i) => {
+                  data.data.map((category, i) => {
                     return (
                       <tr key={category.id}>
                         <td className="px-2 text-center py-5 border-b border-gray-200 bg-white text-sm">{i + 1}</td>

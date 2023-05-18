@@ -5,7 +5,7 @@ import HelmetLayout from "@/layouts/HelmetLayout";
 
 export function QuestionList() {
   const { useAxios } = useAuth();
-  const [{ data = [], loading }] = useAxios<AppInterface.questions[]>({ url: "/questions" });
+  const [{ data = { data: [] }, loading }] = useAxios<{ ata: AppInterface.questions[] }>({ url: "/questions" });
   return (
     <HelmetLayout title="Questions List " className="py-10">
       <div className="mt-10">
@@ -69,7 +69,7 @@ export function QuestionList() {
                     </td>
                   </tr>
                 ) : (
-                  data.map((qs, i) => {
+                  data.data.map((qs, i) => {
                     return (
                       <tr key={qs.id}>
                         <td className="px-2 text-center py-5 border-b border-gray-200 bg-white text-sm">{i + 1}</td>

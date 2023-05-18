@@ -12,7 +12,7 @@ import { routes } from "@/commons/enums/routes";
 
 export default function ListNewsPage() {
   const { useAxios } = useAuth();
-  const [{ data = [], loading, error }, refetchUsers] = useAxios<AppInterface.Article[]>({ url: "/news" });
+  const [{ data = { data: [] }, loading, error }, refetchUsers] = useAxios<{ data: AppInterface.Article[] }>({ url: "/news" });
   const [openAddUser, setOpenAddUser] = useState(false);
   const [userEdit, setUserEdit] = useState<AppInterface.User | null>(null);
   const [userChangePassword, setUserChangePassword] = useState<AppInterface.User | null>(null);
@@ -91,7 +91,7 @@ export default function ListNewsPage() {
                     </td>
                   </tr>
                 ) : (
-                  data.map((news, i) => {
+                  data.data.map((news, i) => {
                     return (
                       <tr key={news.id}>
                         <td className="px-2 text-center py-5 border-b border-gray-200 bg-white text-sm">{i + 1}</td>

@@ -9,7 +9,7 @@ export default function SubCategoryEdit({ onCLose, subCategory }: Props) {
   if (!subCategory) return <></>;
 
   const { useAxios } = useAuth();
-  const [{ loading: loadingCategory, data: dataCategory = [] }] = useAxios<AppInterface.CategoryProduct[]>("/products-category");
+  const [{ loading: loadingCategory, data: dataCategory = { data: [] } }] = useAxios<{ data: AppInterface.CategoryProduct[] }>("/products-category");
   let [isOpen, setIsOpen] = useState(!!subCategory);
   const [{ loading: putLoading, error: putError, response: responsePut }, executePost] = useAxios({ url: "/products-category/" + subCategory.id, method: "PUT" }, { manual: true });
   const [data, setData] = useState(subCategory);
@@ -73,7 +73,7 @@ export default function SubCategoryEdit({ onCLose, subCategory }: Props) {
                       label="Product Category"
                       value={data.category_id}
                       onChange={(e) => setData({ ...data, category_id: e.target.value })}
-                      options={dataCategory.map((ctg) => ({ value: ctg.id, label: ctg.name }))}
+                      options={dataCategory.data.map((ctg) => ({ value: ctg.id, label: ctg.name }))}
                     />
                     <InputCustom label="Sub Category Name" onChange={(e) => setData({ ...data, name: e.target.value })} value={data.name} />
                     <div className="mt-4">

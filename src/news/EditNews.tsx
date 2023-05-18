@@ -30,7 +30,7 @@ export default function EditNewsPage({ news }: Props) {
   }, []);
 
   return (
-    <HelmetLayout title="Add News" breads={[{ text: "News", url: routes.news }, { text: "Add" }]}>
+    <HelmetLayout title="Add News" breads={[{ text: "News", url: routes.news.list }, { text: "Add" }]}>
       <div className="py-8">
         <div className="flex justify-between">
           <h2 className="text-2xl font-semibold leading-tight">Add News</h2>

@@ -7,12 +7,11 @@ import { AppInterface } from "@/commons/interface/app";
 import { ButtonCustom, ButtonDelete, ButtonEdit } from "@/components/form";
 import { Icon } from "@iconify/react";
 import routes from "@/commons/enums/routes";
-import EditCategory from "@/category/EditCategory";
 import CreateSubCategory from "./CreateSubCategory";
 import SubCategoryEdit from "./EditSubCategory";
 export function SubCategoryProductList() {
   const { useAxios, api } = useAuth();
-  const [{ data = [], loading }, refetchCategory] = useAxios<AppInterface.SubProductCategory[]>({ url: "/products-subcategory" });
+  const [{ data = { data: [] }, loading }, refetchCategory] = useAxios<{ data: AppInterface.SubProductCategory[] }>({ url: "/products-subcategory" });
   const setBreads = useSetRecoilState(listBreadCrumbAtom);
   useEffect(() => {
     setBreads([{ text: "Product", url: routes.product.list }, { text: "Sub Category Product" }]);
@@ -88,7 +87,7 @@ export function SubCategoryProductList() {
                     </td>
                   </tr>
                 ) : (
-                  data.map((category, i) => {
+                  data.data.map((category, i) => {
                     return (
                       <tr key={category.id}>
                         <td className="px-2 text-center py-5 border-b border-gray-200 bg-white text-sm">{i + 1}</td>

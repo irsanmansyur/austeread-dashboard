@@ -63,8 +63,8 @@ export default function Sidebar({ openSideBar, setOpenSideBar }: { setting_app?:
           <li className="mx-3.5 mt-4 mb-2">
             <p className="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">News</p>
           </li>
-          <LiSideBar url={routes.news} text="Manage News" icon={<MdOutlineArticle className="w-5 h-5 text-inherit" />} />
-          <LiSideBar url={routes.categori.list} text="Manage News Category" icon={<MdCategory className="w-5 h-5 text-inherit" />} />
+          <LiSideBar url={routes.news.list} text="Manage News" icon={<MdOutlineArticle className="w-5 h-5 text-inherit" />} />
+          <LiSideBar url={routes.news.category} text="Manage News Category" icon={<MdCategory className="w-5 h-5 text-inherit" />} />
           <LiSideBar url={routes.hightlight.list} text="Manage Hightlight" icon={<Icon className="w-5 h-5 text-inherit" icon="cryptocurrency:hight" />} />
           {/* end of news menu */}
           <LiPembatas />
@@ -77,6 +77,10 @@ export default function Sidebar({ openSideBar, setOpenSideBar }: { setting_app?:
           <LiSideBar url={routes.product.sub_category} text="Product Sub Category" icon={<Icon className="w-5 h-5 text-inherit" icon="iconamoon:category-thin" />} />
           {/* end of Product menu */}
           <LiPembatas />
+
+          {/* Order Menu */}
+          <LiSideBar url={routes.Order.list} text="Order List" icon={<Icon icon={"material-symbols:order-approve"} className="w-5 h-5 text-inherit" />} />
+          {/* end of Order  menu */}
 
           {/* Discount Menu */}
           <LiSideBar url={routes.discount} text="Discount Code" icon={<Icon icon={"bxs:discount"} className="w-5 h-5 text-inherit" />} />

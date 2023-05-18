@@ -113,4 +113,38 @@ export namespace AppInterface {
     category_id: string;
     name: string;
   };
+
+  export type Order = {
+    id:string
+    id_person:string
+    name:string
+    detail_address:string
+    province:number
+    city:number
+    district:number
+    postal_code:number
+    courier:string
+    service:string
+    phone:string
+    payment_method:string
+    status:string
+    receipt:string
+    discount_price:number
+    shipping_price:number
+    shipping_receipt:any|null
+    total:number
+    order: Record<string, any>;
+    payment_expired: string;
+    payment_fee: payment_fee;
+    createdAt:string
+    updatedAt:string
+  };
+
+  export type payment_fee= {
+    fixFee: number;
+    percentFee: number;
+    totalFee: number;
+    totalPPN: number;
+  }
+
 }

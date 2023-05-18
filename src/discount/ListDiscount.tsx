@@ -102,7 +102,7 @@ export function ListDiscount() {
                             <ButtonDelete
                               handleDelete={(property) => {
                                 return api
-                                  .delete(`news-discount/${discount.id}`)
+                                  .delete(`discount_code/${discount.id}`)
                                   .then((resp) => refectDiscount())
                                   .catch((error) => {
                                     property?.setError && property?.setError(error?.message || "Gagal hapus Category");

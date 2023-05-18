@@ -9,7 +9,7 @@ import FooterCreateModal from "./FooterCreateModal";
 
 export default function FooterConfig() {
   const { useAxios, api } = useAuth();
-  const [{ data = [], loading }, refetchData] = useAxios<AppInterface.ShopFooter[]>("/shopFooter");
+  const [{ data = { data: [] }, loading }, refetchData] = useAxios<{ data: AppInterface.ShopFooter[] }>("/shopFooter");
   const [editFooter, setEditFooter] = useState<AppInterface.ShopFooter | undefined>();
   const [createFooter, setCreateFooter] = useState(false);
   return (
@@ -20,7 +20,7 @@ export default function FooterConfig() {
           <Icon icon={"material-symbols:add"} />
         </ButtonCustom>
       </div>
-      {data.map((SF, i: number) => {
+      {data.data.map((SF, i: number) => {
         return (
           <div className="flex gap-2 items-center" key={i}>
             <InputCustom placeholder={SF.name} classParent="w-full" readOnly disabled />

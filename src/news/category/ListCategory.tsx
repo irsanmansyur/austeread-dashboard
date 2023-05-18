@@ -7,9 +7,10 @@ import { AppInterface } from "@/commons/interface/app";
 import { ButtonCustom, ButtonDelete, ButtonEdit } from "@/components/form";
 import { Icon } from "@iconify/react";
 import CreateCategory from "./CreateCategory";
+import EditCategory from "./EditCategory";
 export function ListCategoryPage() {
   const { useAxios, api } = useAuth();
-  const [{ data = [], loading, error: errorLoadCategory, response }, refetchCategory] = useAxios<AppInterface.Kategori[]>({ url: "/news-category" });
+  const [{ data = { data: [] }, loading, error: errorLoadCategory, response }, refetchCategory] = useAxios<{ data: AppInterface.Kategori[] }>({ url: "/getAllCategory" });
   const setBreads = useSetRecoilState(listBreadCrumbAtom);
   useEffect(() => {
     setBreads([{ text: "News" }]);
@@ -17,6 +18,7 @@ export function ListCategoryPage() {
   }, []);
 
   const [createCategory, setCreateCategory] = useState(false);
+  const [newsCategoryEdit, setNewCategoryEdit] = useState<AppInterface.Kategori>();
 
   return (
     <HelmetLayout title="List Category">
@@ -28,7 +30,7 @@ export function ListCategoryPage() {
             <Icon icon="material-symbols:add" className="w-7 h-7" />
           </div>
         </div>
-        <div className="my-2 flex sm:flex-row flex-col">
+        {/* <div className="my-2 flex sm:flex-row flex-col">
           <div className="flex flex-row mb-1 sm:mb-0">
             <div className="relative">
               <select className="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
@@ -66,7 +68,7 @@ export function ListCategoryPage() {
               className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
             />
           </div>
-        </div>
+        </div> */}
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
             <table className="min-w-full leading-normal">
@@ -86,7 +88,7 @@ export function ListCategoryPage() {
                     </td>
                   </tr>
                 ) : (
-                  data.map((category, i) => {
+                  data.data.map((category, i) => {
                     return (
                       <tr key={category.id}>
                         <td className="px-2 text-center py-5 border-b border-gray-200 bg-white text-sm">{i + 1}</td>
@@ -101,7 +103,7 @@ export function ListCategoryPage() {
                         </td>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                           <div className=" flex justify-center items-center gap-2">
-                            <ButtonEdit>Edit</ButtonEdit>
+                            <ButtonEdit onClick={(e) => setNewCategoryEdit(category)}>Edit</ButtonEdit>
                             <ButtonDelete
                               handleDelete={(property) => {
                                 return api
@@ -132,7 +134,17 @@ export function ListCategoryPage() {
           </div>
         </div>
       </div>
-      <CreateCategory open={createCategory} onCLose={() => setCreateCategory(false)} />
+      <EditCategory
+        category={newsCategoryEdit}
+        onCLose={(updated) => {
+          setNewCategoryEdit(undefined);
+          updated;
+        }}
+        onUpdated={(res) => {
+          refetchCategory();
+        }}
+      />
+      <CreateCategory onCreated={(res) => refetchCategory()} open={createCategory} onCLose={() => setCreateCategory(false)} />
     </HelmetLayout>
   );
 }

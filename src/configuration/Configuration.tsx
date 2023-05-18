@@ -11,7 +11,7 @@ import GeneralConfig from "./GeneralConfig";
 
 export function Configuration() {
   const { useAxios } = useAuth();
-  const [{ data, loading }] = useAxios<AppInterface.Config>("config");
+  const [{ data, loading }] = useAxios<{ data: AppInterface.Config }>("config");
   const { data: config, setData } = useForm(data);
   const [openTab, setOpenTab] = useState(1);
 
@@ -57,8 +57,8 @@ export function Configuration() {
           </ul>
         </div>
         <div className="card-body py-5">
-          {openTab === 1 && <GeneralConfig data={data} />}
-          {openTab === 2 && <RajaOnkirConfig origin_rajaongkir={data?.origin_rajaongkir || ""} />}
+          {openTab === 1 && <GeneralConfig data={data?.data} />}
+          {openTab === 2 && <RajaOnkirConfig origin_rajaongkir={data?.data.origin_rajaongkir || ""} />}
           {openTab === 3 && <FooterConfig />}
         </div>
       </div>
