@@ -3,8 +3,10 @@ import { Fragment, useEffect, useState } from "react";
 import { InputCustom, ButtonCustom } from "@/components/form";
 import { VscChromeClose } from "react-icons/vsc";
 import { useAuth } from "@/context/auth";
-type Props = { category: { name: string; id: string }; open?: boolean; onCLose?: (updated?: boolean) => void };
-export default function EditCategory({ open = false, onCLose, category }: Props) {
+import { AppInterface } from "@/commons/interface/app";
+type Props = { category?: AppInterface.CategoryProduct; open?: boolean; onCLose?: (updated?: boolean) => void };
+export default function EditProductCategory({ open = false, onCLose, category }: Props) {
+  if (!category) return <></>;
   let [isOpen, setIsOpen] = useState(open);
   const { useAxios, user } = useAuth();
   const [{ loading: putLoading, error: putError, response: responsePut }, executePost] = useAxios({ url: "/news-category/" + category.id, method: "PUT" }, { manual: true });

@@ -26,7 +26,7 @@ export default function Sidebar({ openSideBar, setOpenSideBar }: { setting_app?:
   };
   return (
     <aside
-      className={`overflow-y-auto bg-gradient-to-br from-slate-800 to-slate-900 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
+      className={`overflow-y-auto bg-gradient-to-br from-slate-800 to-slate-900 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:-translate-x-0 ${
         openSideBar ? "translate-x-0" : "-translate-x-80"
       }`}
     >

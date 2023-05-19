@@ -1,3 +1,5 @@
+import { ProductType } from "./product.interface";
+
 export namespace AppInterface {
   interface baseMongo {
     id?: string;
@@ -115,36 +117,38 @@ export namespace AppInterface {
   };
 
   export type Order = {
-    id:string
-    id_person:string
-    name:string
-    detail_address:string
-    province:number
-    city:number
-    district:number
-    postal_code:number
-    courier:string
-    service:string
-    phone:string
-    payment_method:string
-    status:string
-    receipt:string
-    discount_price:number
-    shipping_price:number
-    shipping_receipt:any|null
-    total:number
+    id: string;
+    id_person: string;
+    name: string;
+    detail_address: string;
+    province: number;
+    city: number;
+    district: number;
+    postal_code: number;
+    courier: string;
+    service: string;
+    phone: string;
+    payment_method: string;
+    status: string;
+    receipt: string;
+    discount_price: number;
+    shipping_price: number;
+    shipping_receipt: any | null;
+    total: number;
     order: Record<string, any>;
     payment_expired: string;
     payment_fee: payment_fee;
-    createdAt:string
-    updatedAt:string
+    createdAt: string;
+    updatedAt: string;
   };
 
-  export type payment_fee= {
+  export type payment_fee = {
     fixFee: number;
     percentFee: number;
     totalFee: number;
     totalPPN: number;
-  }
-
+  };
+  export type Product = ProductType & {
+    tbl_user: User;
+  };
 }

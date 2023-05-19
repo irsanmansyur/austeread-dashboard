@@ -8,7 +8,17 @@ import Home from "@/pages/home";
 import { routes } from "@/commons/enums/routes";
 import UserList from "@/pages/users";
 import NotFound from "@/pages/NotFound";
-import pages, { Configuration, ListCategoryPage, ListCategoryProductPage, ListDiscount, ListHighlight, OrderList, QuestionList, SubCategoryProductList } from "@/pages";
+import pages, {
+  Configuration,
+  ListCategoryPage,
+  ListCategoryProductPage,
+  ListDiscount,
+  ListHighlight,
+  OrderList,
+  ProductCreate,
+  QuestionList,
+  SubCategoryProductList,
+} from "@/pages";
 import ListProduct from "@/product/ListProduct";
 // Configure nested routes with JSX
 export const browserRoutes = createBrowserRouter(
@@ -32,6 +42,7 @@ export const browserRoutes = createBrowserRouter(
         <Route path={routes.Order.list} element={<OrderList />} />
 
         <Route path={routes.product.list} element={<ListProduct />} />
+        <Route path={routes.product.add} element={<ProductCreate />} />
         <Route path={routes.product.category} element={<ListCategoryProductPage />} />
         <Route path={routes.product.sub_category} element={<SubCategoryProductList />} />
 

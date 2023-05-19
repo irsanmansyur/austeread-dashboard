@@ -8,7 +8,7 @@ import { ButtonCustom, ButtonDelete, ButtonEdit } from "@/components/form";
 import { Icon } from "@iconify/react";
 import CreateCategory from "./CreateCategory";
 import routes from "@/commons/enums/routes";
-import EditCategory from "@/news/category/EditCategory";
+import EditProductCategory from "./EditCategory";
 export function ListCategoryProductPage() {
   const { useAxios, api } = useAuth();
   const [{ data = { data: [] }, loading, error: errorLoadCategory, response }, refetchCategory] = useAxios<{ data: AppInterface.CategoryProduct[] }>({ url: "/products-category" });
@@ -127,7 +127,7 @@ export function ListCategoryProductPage() {
           </div>
         </div>
       </div>
-      <EditCategory
+      <EditProductCategory
         category={categoryEdit}
         onCLose={(updated) => {
           setCategoryEdit(undefined);

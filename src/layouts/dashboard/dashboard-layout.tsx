@@ -27,7 +27,7 @@ export default function DashboardLayout() {
         return Promise.reject(error);
       }
     );
-    if (!loading && !isAuthenticated) navigate(routes.login, { replace: true });
+    // if (!isAuthenticated) navigate(routes.login, { replace: true });
     return () => {};
   }, [isAuthenticated, loading]);
 

@@ -9,9 +9,9 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
   error?: string;
   classParent?: string;
 }
-export const InputCustom = ({ classParent = "", id, label = "", className = "", error, ...props }: Props) => {
+export const InputCustom = ({ classParent = "", id, label = "", className = "", error, type: ty, ...props }: Props) => {
   const idCustom = lastId(id ?? "input-");
-  const [type, setType] = useState(props.type ?? "text");
+  const [type, setType] = useState(ty ?? "text");
   return (
     <div className={twMerge("mb-3 last:mb-1", classParent)}>
       <label htmlFor={idCustom} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -27,7 +27,7 @@ export const InputCustom = ({ classParent = "", id, label = "", className = "", 
             className
           )}
         />
-        {props.type && props.type == "password" && <ShowEye setType={setType} />}
+        {ty && ty == "password" && <ShowEye setType={setType} />}
       </div>
       <InputError message={error} />
     </div>

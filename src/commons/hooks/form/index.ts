@@ -5,7 +5,7 @@ export function useForm<TForm = Record<string, any>>(initValue: Record<string, a
   const { api } = useAuth();
   const [response, setResponse] = useState(null);
   const [errors, setErrors] = useState<Record<keyof TForm, string>>();
-  const [data, setDataDefault] = useState<Record<string, any>>(initValue);
+  const [data, setDataDefault] = useState<TForm>(initValue as TForm);
   const [loading, setloading] = useState(false);
 
   const setData = <K extends keyof TForm>(key: K, value: TForm[K]) => {

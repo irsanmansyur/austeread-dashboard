@@ -5,6 +5,7 @@ import { VscChromeClose } from "react-icons/vsc";
 import { useAuth } from "@/context/auth";
 import { AppInterface } from "@/commons/interface/app";
 import { useMessage } from "@/commons/hooks/message";
+import { AxiosResponse } from "axios";
 type Props = { category?: AppInterface.Kategori; onCLose?: (updated?: boolean) => void; onUpdated?: (response: AxiosResponse<any, any> | undefined) => void };
 export default function EditCategory({ onCLose, category, onUpdated }: Props) {
   if (!category) return <></>;
